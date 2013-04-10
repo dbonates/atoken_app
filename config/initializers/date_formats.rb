@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:lasting] = "%l:%M:%S-%e/%B/%Y"
