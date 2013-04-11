@@ -22,7 +22,7 @@ class AuthController < ApplicationController
         :auth_token_expires_at => @user.auth_token_expires_at.to_s(:lasting)
       }
       else
-        render :status => 405, :text => "Erro criar usuário."
+        render :status => 405, :json => {:error => "Erro criar usuário."}
     end
     
   end
@@ -32,7 +32,7 @@ class AuthController < ApplicationController
     @user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     
     if @user
-      ttl = params[:ttl] ? params[:ttl].to_i : 20
+      ttl = params[:ttl] ? params[:ttl].to_i : 15
       kme = params[:kme] ? params[:kme].to_i : false
       
       if @user.auth_token_expired?
@@ -48,7 +48,7 @@ class AuthController < ApplicationController
       }
       
     else
-      render :status => 402, :text => "Credenciais inválidas para esse usuário."
+      render :status => 401, :json => {:error => "usuário e/ou senha inválidos."}
     end
     
   end            
@@ -59,7 +59,7 @@ class AuthController < ApplicationController
   def check_parameters
     if params[:username].blank? || params[:password].blank?
       
-      render :status => 402, :text => "username e password são requeridos."
+      render :status => 401, :json => {:error => "username e password são requeridos."}
       
     end
   end

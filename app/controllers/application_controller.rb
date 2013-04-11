@@ -15,13 +15,14 @@ class ApplicationController < ActionController::Base
             :username => @user.username,
             :email => @user.email,
             :assinante => @user.assinante,
-            'expira_em' => @user.auth_token_expires_at.to_s(:lasting),
+            # :auth_token => @user.auth_token,
+            'expira_em' => "#{(@user.auth_token_expires_at-Time.zone.now).round} segundos",
           }
         else
-          render :status => 401, :text => "Sessão do usuário #{@user.username} expirada."  
+          render :status => 403, :json => { :error => "Sessão do usuário #{@user.username} expirada."}  
         end
       else
-        render :status => 401, :text => "Requer credenciais válidas."
+        render :status => 401, :json => { :error => "Esse acesso requer credenciais válidas."}
       end
     
   end
