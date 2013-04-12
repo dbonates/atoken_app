@@ -1,4 +1,4 @@
-Sistema de autenticação via token/timeout
+<h2>Sistema de autenticação via token/timeout</h2>
 =========================================
 
 A autenticação considera usuários previamente cadastrados no banco de dados. 
