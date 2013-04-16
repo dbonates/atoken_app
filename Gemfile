@@ -38,7 +38,11 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'debugger'
 
 group :development do
-	gem 'sqlite3'
+	gem 'sqlite3' 
+	
+	# about debug!
+	gem 'better_errors'
+	gem "binding_of_caller"
 end
 
 
