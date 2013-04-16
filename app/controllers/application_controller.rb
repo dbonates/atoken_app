@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
           render :status => 403, :json => { :error => "Sessão do usuário #{@user.username} expirada."}  
         end
       else
-        render :status => 401, :json => { :error => "Esse acesso requer credenciais válidas."}
+        render :status => 401, :json => { error: "Esse acesso requer credenciais válidas."}
       end
     
   end
